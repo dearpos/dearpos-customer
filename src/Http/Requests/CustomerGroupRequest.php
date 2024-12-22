@@ -3,7 +3,6 @@
 namespace DearPOS\DearPOSCustomer\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class CustomerGroupRequest extends FormRequest
 {
