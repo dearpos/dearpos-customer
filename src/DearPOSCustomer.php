@@ -2,4 +2,6 @@
 
 namespace DearPOS\DearPOSCustomer;
 
-class DearPOSCustomer {}
+use DearPOS\DearPOSCustomer\Services\CustomerService;
+
+class DearPOSCustomer extends CustomerService {}

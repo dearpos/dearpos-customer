@@ -2,24 +2,36 @@
 
 namespace DearPOS\DearPOSCustomer;
 
+use DearPOS\DearPOSCustomer\Commands\CustomerCleanupCommand;
+use DearPOS\DearPOSCustomer\Commands\CustomerCreateCommand;
+use DearPOS\DearPOSCustomer\Commands\CustomerExportCommand;
+use DearPOS\DearPOSCustomer\Commands\CustomerImportCommand;
+use DearPOS\DearPOSCustomer\Commands\CustomerSyncBalanceCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use DearPOS\DearPOSCustomer\Commands\DearPOSCustomerCommand;
 
 class DearPOSCustomerServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('dearpos-customer')
-            ->hasConfigFile()
+            ->hasConfigFile('customer')
             ->hasViews()
-            ->hasMigration('create_dearpos_customer_table')
-            ->hasCommand(DearPOSCustomerCommand::class);
+            ->hasMigrations([
+                'create_customer_groups_table',
+                'create_customers_table',
+                'create_customer_addresses_table',
+                'create_customer_contacts_table',
+                'create_customer_credit_history_table',
+            ])
+            ->hasCommands([
+                CustomerCreateCommand::class,
+                CustomerImportCommand::class,
+                CustomerExportCommand::class,
+                CustomerCleanupCommand::class,
+                CustomerSyncBalanceCommand::class,
+            ])
+            ->hasRoute('api');
     }
 }
