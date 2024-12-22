@@ -2,7 +2,6 @@
 
 namespace DearPOS\DearPOSCustomer\Http\Requests;
 
-use DearPOS\DearPOSCustomer\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CustomerRequest extends FormRequest
@@ -36,9 +35,6 @@ class CustomerRequest extends FormRequest
             $rules['code'][] = 'unique:customers,code,'.$this->route('customer')->id;
             $rules['email'][] = 'unique:customers,email,'.$this->route('customer')->id;
         }
-            'status' => ['required', 'string', 'in:active,inactive'],
-            'group_id' => ['nullable', 'exists:customer_groups,id'],
-        ];
 
         return $rules;
     }
