@@ -2,7 +2,9 @@
 
 namespace DearPOS\DearPOSCustomer\Http\Requests;
 
+use DearPOS\DearPOSCustomer\Models\CustomerGroup;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CustomerGroupRequest extends FormRequest
 {
@@ -14,19 +16,16 @@ class CustomerGroupRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => ['required', 'string', 'max:100'],
+            'name' => [
+                'required', 
+                'string', 
+                'max:255',
+                Rule::unique('customer_groups')->ignore($this->route('customerGroup')),
+            ],
             'description' => ['nullable', 'string'],
-            'discount_percentage' => ['numeric', 'min:0', 'max:100'],
-            'is_active' => ['boolean'],
+            'discount_percentage' => ['nullable', 'numeric', 'min:0', 'max:100'],
+            'is_active' => ['required', 'boolean'],
         ];
-
-        if ($this->isMethod('POST')) {
-            $rules['name'][] = 'unique:customer_groups,name';
-        }
-
-        if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['name'][] = 'unique:customer_groups,name,' . $this->route('customer_group')->id;
-        }
 
         return $rules;
     }

@@ -7,11 +7,13 @@ use DearPOS\DearPOSCustomer\Http\Resources\CustomerGroupCollection;
 use DearPOS\DearPOSCustomer\Http\Resources\CustomerGroupResource;
 use DearPOS\DearPOSCustomer\Models\CustomerGroup;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\ValidationException;
 
 class CustomerGroupController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): CustomerGroupCollection
     {
         $query = CustomerGroup::query();
 
@@ -20,7 +22,7 @@ class CustomerGroupController extends Controller
         }
 
         if ($request->has('status')) {
-            $query->where('is_active', $request->status === 'active');
+            $query->where('is_active', (bool) $request->status === 'active');
         }
 
         $perPage = $request->input('per_page', 15);
@@ -29,35 +31,35 @@ class CustomerGroupController extends Controller
         return new CustomerGroupCollection($customerGroups);
     }
 
-    public function store(CustomerGroupRequest $request)
+    public function store(CustomerGroupRequest $request): CustomerGroupResource
     {
         $customerGroup = CustomerGroup::create($request->validated());
 
         return new CustomerGroupResource($customerGroup);
     }
 
-    public function show(CustomerGroup $customerGroup)
+    public function show(CustomerGroup $customerGroup): CustomerGroupResource
     {
         return new CustomerGroupResource($customerGroup);
     }
 
-    public function update(CustomerGroupRequest $request, CustomerGroup $customerGroup)
+    public function update(CustomerGroupRequest $request, CustomerGroup $customerGroup): CustomerGroupResource
     {
         $customerGroup->update($request->validated());
 
-        return new CustomerGroupResource($customerGroup);
+        return new CustomerGroupResource($customerGroup->refresh());
     }
 
-    public function destroy(CustomerGroup $customerGroup)
+    public function destroy(CustomerGroup $customerGroup): \Illuminate\Http\JsonResponse
     {
         if ($customerGroup->customers()->exists()) {
-            return response()->json([
-                'message' => 'Cannot delete group with active customers',
-            ], 422);
+            throw ValidationException::withMessages([
+                'group' => 'Cannot delete group with customers',
+            ]);
         }
 
         $customerGroup->delete();
 
-        return response()->noContent();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

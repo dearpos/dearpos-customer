@@ -16,8 +16,7 @@ class DearPOSCustomerServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('dearpos-customer')
-            ->hasConfigFile('customer')
-            ->hasViews()
+            ->hasConfigFile()
             ->hasMigrations([
                 'create_customer_groups_table',
                 'create_customers_table',

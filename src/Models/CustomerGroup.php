@@ -3,12 +3,14 @@
 namespace DearPOS\DearPOSCustomer\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CustomerGroup extends Model
 {
+    use HasFactory;
     use HasUuids;
     use SoftDeletes;
 
@@ -20,7 +22,7 @@ class CustomerGroup extends Model
     ];
 
     protected $casts = [
-        'discount_percentage' => 'decimal:2',
+        'discount_percentage' => 'decimal:4',
         'is_active' => 'boolean',
     ];
 

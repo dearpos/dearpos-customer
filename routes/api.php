@@ -7,7 +7,7 @@ use DearPOS\DearPOSCustomer\Http\Controllers\CustomerContactController;
 use DearPOS\DearPOSCustomer\Http\Controllers\CustomerCreditController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::prefix('api')->group(function () {
     // Customer Groups
     Route::apiResource('customer-groups', CustomerGroupController::class);
 
