@@ -2,15 +2,11 @@
 
 namespace DearPOS\DearPOSCustomer;
 
-<<<<<<< HEAD
 use DearPOS\DearPOSCustomer\Commands\CustomerCleanupCommand;
 use DearPOS\DearPOSCustomer\Commands\CustomerCreateCommand;
 use DearPOS\DearPOSCustomer\Commands\CustomerExportCommand;
 use DearPOS\DearPOSCustomer\Commands\CustomerImportCommand;
 use DearPOS\DearPOSCustomer\Commands\CustomerSyncBalanceCommand;
-=======
-use DearPOS\DearPOSCustomer\Commands\DearPOSCustomerCommand;
->>>>>>> c9c5ddfb5d56477997b9d493613084b070b5f124
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
