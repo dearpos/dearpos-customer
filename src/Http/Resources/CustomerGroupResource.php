@@ -17,8 +17,8 @@ class CustomerGroupResource extends JsonResource
             'is_active' => $this->is_active,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'customers_count' => $this->when($request->routeIs('customer-groups.index'), 
-                fn() => $this->customers()->count()
+            'customers_count' => $this->when($request->routeIs('customer-groups.index'),
+                fn () => $this->customers()->count()
             ),
         ];
     }

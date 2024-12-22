@@ -4,9 +4,9 @@ namespace DearPOS\DearPOSCustomer\Services;
 
 use DearPOS\DearPOSCustomer\Models\Customer;
 use DearPOS\DearPOSCustomer\Models\CustomerGroup;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection as SupportCollection;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class CustomerService
@@ -32,6 +32,7 @@ class CustomerService
     {
         return DB::transaction(function () use ($customer, $data) {
             $customer->update($data);
+
             return $customer->fresh();
         });
     }
@@ -47,14 +48,14 @@ class CustomerService
     {
         $customer = $this->getCustomerById($id);
 
-        if (!$customer) {
-            throw new ModelNotFoundException("Customer not found");
+        if (! $customer) {
+            throw new ModelNotFoundException('Customer not found');
         }
 
         $newBalance = $customer->current_balance + $amount;
 
         if ($newBalance > $customer->credit_limit) {
-            throw new \Exception("Insufficient credit limit");
+            throw new \Exception('Insufficient credit limit');
         }
 
         $customer->update(['current_balance' => $newBalance]);
@@ -78,6 +79,7 @@ class CustomerService
     {
         return DB::transaction(function () use ($group, $data) {
             $group->update($data);
+
             return $group->fresh();
         });
     }
@@ -150,14 +152,14 @@ class CustomerService
                 $customers->push($customer);
 
                 // Import alamat jika ada
-                if (!empty($customerData['addresses'])) {
+                if (! empty($customerData['addresses'])) {
                     foreach ($customerData['addresses'] as $addressData) {
                         $this->addAddress($customer, $addressData);
                     }
                 }
 
                 // Import kontak jika ada
-                if (!empty($customerData['contacts'])) {
+                if (! empty($customerData['contacts'])) {
                     foreach ($customerData['contacts'] as $contactData) {
                         $this->addContact($customer, $contactData);
                     }

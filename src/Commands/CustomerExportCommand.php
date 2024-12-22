@@ -18,6 +18,7 @@ class CustomerExportCommand extends Command
 
         if ($format !== 'csv') {
             $this->error("Unsupported format: {$format}");
+
             return self::FAILURE;
         }
 
@@ -27,7 +28,7 @@ class CustomerExportCommand extends Command
         $headers = [
             'id', 'group_id', 'code', 'name', 'email', 'phone', 'mobile',
             'tax_number', 'credit_limit', 'current_balance', 'notes', 'status',
-            'created_at', 'updated_at'
+            'created_at', 'updated_at',
         ];
         fputcsv($handle, $headers);
 
@@ -45,6 +46,7 @@ class CustomerExportCommand extends Command
         fclose($handle);
 
         $this->info("Customers exported successfully to {$file}");
+
         return self::SUCCESS;
     }
 }

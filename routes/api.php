@@ -1,10 +1,10 @@
 <?php
 
-use DearPOS\DearPOSCustomer\Http\Controllers\CustomerController;
-use DearPOS\DearPOSCustomer\Http\Controllers\CustomerGroupController;
 use DearPOS\DearPOSCustomer\Http\Controllers\CustomerAddressController;
 use DearPOS\DearPOSCustomer\Http\Controllers\CustomerContactController;
+use DearPOS\DearPOSCustomer\Http\Controllers\CustomerController;
 use DearPOS\DearPOSCustomer\Http\Controllers\CustomerCreditController;
+use DearPOS\DearPOSCustomer\Http\Controllers\CustomerGroupController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('api')->group(function () {

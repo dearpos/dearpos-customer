@@ -37,7 +37,7 @@ class CustomerContact extends Model
 
         static::creating(function ($contact) {
             // Jika ini kontak pertama, set sebagai primer
-            if (!$contact->customer->contacts()->exists()) {
+            if (! $contact->customer->contacts()->exists()) {
                 $contact->is_primary = true;
             }
         });

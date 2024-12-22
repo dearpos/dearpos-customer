@@ -40,7 +40,7 @@ class CustomerAddress extends Model
 
         static::creating(function ($address) {
             // Jika ini alamat pertama, set sebagai default
-            if (!$address->customer->addresses()->exists()) {
+            if (! $address->customer->addresses()->exists()) {
                 $address->is_default = true;
             }
         });
