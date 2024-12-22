@@ -13,7 +13,7 @@ class CustomerFactory extends Factory
     {
         return [
             'id' => $this->faker->uuid(),
-            'code' => 'CUST' . fake()->numberBetween(100, 999),
+            'code' => 'CUST'.fake()->numberBetween(100, 999),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),

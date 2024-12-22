@@ -3,8 +3,6 @@
 namespace DearPOS\DearPOSCustomer\Http\Controllers;
 
 use DearPOS\DearPOSCustomer\Http\Requests\CustomerRequest;
-use DearPOS\DearPOSCustomer\Http\Resources\CustomerCollection;
-use DearPOS\DearPOSCustomer\Http\Resources\CustomerResource;
 use DearPOS\DearPOSCustomer\Models\Customer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
