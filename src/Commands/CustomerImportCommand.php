@@ -15,15 +15,17 @@ class CustomerImportCommand extends Command
     public function handle(CustomerService $service): int
     {
         $file = $this->argument('file');
-        
-        if (!file_exists($file)) {
+
+        if (! file_exists($file)) {
             $this->error("File not found: {$file}");
+
             return self::FAILURE;
         }
 
         $format = strtolower($this->option('format'));
         if ($format !== 'csv') {
             $this->error("Unsupported format: {$format}");
+
             return self::FAILURE;
         }
 
@@ -34,7 +36,7 @@ class CustomerImportCommand extends Command
 
         while (($data = fgetcsv($handle)) !== false) {
             $row = array_combine($headers, $data);
-            
+
             try {
                 $validator = Validator::make($row, [
                     'name' => 'required|string|max:100',
@@ -43,23 +45,24 @@ class CustomerImportCommand extends Command
                 ]);
 
                 if ($validator->fails()) {
-                    $errors[] = "Row {$count}: " . implode(', ', $validator->errors()->all());
+                    $errors[] = "Row {$count}: ".implode(', ', $validator->errors()->all());
+
                     continue;
                 }
 
                 $service->createCustomer($row);
                 $count++;
             } catch (\Exception $e) {
-                $errors[] = "Row {$count}: " . $e->getMessage();
+                $errors[] = "Row {$count}: ".$e->getMessage();
             }
         }
 
         fclose($handle);
 
         $this->info("Imported {$count} customers successfully.");
-        
-        if (!empty($errors)) {
-            $this->error("Encountered " . count($errors) . " errors:");
+
+        if (! empty($errors)) {
+            $this->error('Encountered '.count($errors).' errors:');
             foreach ($errors as $error) {
                 $this->error($error);
             }

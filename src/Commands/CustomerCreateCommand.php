@@ -23,9 +23,11 @@ class CustomerCreateCommand extends Command
         try {
             $customer = $service->createCustomer($data);
             $this->info("Customer created successfully with ID: {$customer->id}");
+
             return self::SUCCESS;
         } catch (\Exception $e) {
             $this->error($e->getMessage());
+
             return self::FAILURE;
         }
     }

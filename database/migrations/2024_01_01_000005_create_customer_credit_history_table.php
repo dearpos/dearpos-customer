@@ -22,9 +22,9 @@ return new class extends Migration
             $table->index('customer_id');
             $table->index(['reference_type', 'reference_id']);
             $table->foreign('created_by')
-                  ->references('id')
-                  ->on('users')
-                  ->restrictOnDelete();
+                ->references('id')
+                ->on('users')
+                ->restrictOnDelete();
         });
     }
 

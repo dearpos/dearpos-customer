@@ -27,6 +27,7 @@ class CustomerCleanupCommand extends Command
             ->forceDelete();
 
         $this->info("Cleaned up {$customersCount} customers and {$groupsCount} groups older than {$days} days");
+
         return self::SUCCESS;
     }
 }

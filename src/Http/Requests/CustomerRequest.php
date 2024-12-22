@@ -32,8 +32,8 @@ class CustomerRequest extends FormRequest
         }
 
         if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['code'][] = 'unique:customers,code,' . $this->route('customer')->id;
-            $rules['email'][] = 'unique:customers,email,' . $this->route('customer')->id;
+            $rules['code'][] = 'unique:customers,code,'.$this->route('customer')->id;
+            $rules['email'][] = 'unique:customers,email,'.$this->route('customer')->id;
         }
 
         return $rules;
