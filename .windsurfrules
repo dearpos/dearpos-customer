@@ -1,0 +1,108 @@
+# dearpos-customer Guidelines
+
+## Project Setup
+1. Project ini menggunakan boilerplate dari spatie/laravel-package-skeleton
+2. Project ini merupakan package yang akan digunakan di Laravel
+3. Project ini harus mempunyai config file agar bisa di setting oleh user
+4. Ikuti PSR-4 autoloading standards
+5. Gunakan Laravel Package Development best practices
+
+## Documentation Requirements
+1. Dokumentasi harus tersedia di folder 'documentations' dengan file-file berikut:
+   - 00-tables.md: Dokumentasi struktur tabel
+   - 01-controllers.md: Dokumentasi controller
+   - 02-routes.md: Dokumentasi routes
+   - 03-functions.md: Dokumentasi fungsi-fungsi helper
+   - 04-commands.md: Dokumentasi command
+   - 05-testing.md: Dokumentasi testing
+
+## Development Guidelines
+1. Migrations, models, dan factories harus mengikuti spesifikasi di documentations/00-tables.md
+2. Controllers, requests, dan responses harus mengikuti spesifikasi di documentations/01-controllers.md
+3. Routes harus mengikuti spesifikasi di documentations/02-routes.md
+4. Facade functions harus mengikuti spesifikasi di documentations/03-functions.md
+5. Commands harus mengikuti spesifikasi di documentations/04-commands.md
+6. Testing harus mengikuti spesifikasi di documentations/05-testing.md
+7. Format di dalam folder tests tidak boleh diubah
+8. Ketika plugin ini install di Laravel, pastikan:
+   1. migrations berhasil dijalankan
+   2. config file berhasil dipublish
+   3. assets (jika ada) berhasil dipublish
+   4. service provider terdaftar di config/app.php
+   5. facades terdaftar di config/app.php
+
+## Code Quality Guidelines
+1. Gunakan PHP CS Fixer untuk menjaga konsistensi kode
+2. Ikuti Laravel coding style
+3. Tulis docblock untuk setiap class dan method
+4. Gunakan type hints dan return types
+5. Tulis unit test untuk setiap fungsi
+6. Jaga code coverage minimal 80%
+
+## File Structure
+```
+src/
+├── Commands/           # Artisan commands
+├── Http/              # Controllers, Requests, Resources
+├── Models/            # Eloquent models
+├── Services/          # Business logic
+├── Facades/           # Facade classes
+├── Providers/         # Service providers
+└── Helpers/           # Helper functions
+
+config/
+└── [plugin].php       # Config file
+
+database/
+├── migrations/        # Database migrations
+├── factories/         # Model factories
+└── seeders/          # Database seeders
+
+resources/
+├── views/            # Blade views (jika ada)
+├── js/              # JavaScript files (jika ada)
+└── css/             # CSS files (jika ada)
+
+tests/
+├── Unit/            # Unit tests
+└── Feature/         # Feature tests
+
+documentations/      # Dokumentasi plugin
+└── template/        # Template dokumentasi
+```
+
+## File Validation
+Sebelum development, pastikan file-file berikut tersedia:
+1. documentations/00-tables.md (jika tidak ada, stop development)
+2. documentations/01-controllers.md (jika tidak ada, buat berdasarkan 00-tables.md dalam bentuk format seperti documentations/template/01-controllers.md)
+3. documentations/02-routes.md (jika tidak ada, buat berdasarkan 01-controllers.md dalam bentuk format seperti documentations/template/02-routes.md)
+4. documentations/03-functions.md (jika tidak ada, buat berdasarkan kebutuhan plugin dalam bentuk format seperti documentations/template/03-functions.md)
+5. documentations/04-commands.md (jika tidak ada, buat berdasarkan kebutuhan plugin dalam bentuk format seperti documentations/template/04-commands.md)
+6. documentations/05-testing.md (jika tidak ada, buat berdasarkan standar testing dalam bentuk format seperti documentations/template/05-testing.md)
+
+## Git Guidelines
+1. Gunakan conventional commits
+2. Branch naming: feature/, bugfix/, hotfix/
+3. Tag releases menggunakan semantic versioning
+4. Maintain CHANGELOG.md
+
+## Security Guidelines
+1. Validasi semua input user
+2. Gunakan Laravel security features
+3. Hindari SQL injection
+4. Protect routes dengan middleware
+5. Sanitize output
+
+## Performance Guidelines
+1. Optimalkan database queries
+2. Cache data yang sering diakses
+3. Gunakan lazy loading untuk relationships
+4. Minimize dependencies
+5. Compress assets
+
+## Maintenance Guidelines
+1. Update dependencies secara berkala
+2. Monitor bug reports
+3. Review pull requests
+4. Update dokumentasi
+5. Maintain backwards compatibility

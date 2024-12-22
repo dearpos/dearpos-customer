@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace DearPOS\DearPOSCustomer;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use DearPOS\DearPOSCustomer\Commands\DearPOSCustomerCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class DearPOSCustomerServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('dearpos-customer')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_migration_table_name_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_dearpos_customer_table')
+            ->hasCommand(DearPOSCustomerCommand::class);
     }
 }
