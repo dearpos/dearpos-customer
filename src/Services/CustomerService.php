@@ -12,15 +12,32 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerService
 {
+    /**
+     * @param string $id
+     * @return Customer|null
+     */
     public function getCustomerById(string $id): ?Customer
     {
         return Customer::find($id);
     }
 
+    /**
+     * Retrieve a customer by their code.
+     *
+     * @param string $code The customer's code.
+     * @return Customer|null The customer, or null if not found.
+     */
     public function getCustomerByCode(string $code): ?Customer
     {
         return Customer::where('code', $code)->first();
     }
+
+    /**
+     * Create a new customer with the given data.
+     *
+     * @param array $data The customer's data.
+     * @return Customer The newly created customer.
+     */
 
     public function createCustomer(array $data): Customer
     {
@@ -29,6 +46,13 @@ class CustomerService
         });
     }
 
+    /**
+     * Update a customer with the given data.
+     *
+     * @param Customer $customer The customer to update.
+     * @param array $data The data to update the customer with.
+     * @return Customer The updated customer.
+     */
     public function updateCustomer(Customer $customer, array $data): Customer
     {
         return DB::transaction(function () use ($customer, $data) {
@@ -38,6 +62,12 @@ class CustomerService
         });
     }
 
+    /**
+     * Delete a customer.
+     *
+     * @param Customer $customer The customer to delete.
+     * @return bool Whether the customer was deleted successfully.
+     */
     public function deleteCustomer(Customer $customer): bool
     {
         return DB::transaction(function () use ($customer) {
@@ -46,7 +76,15 @@ class CustomerService
     }
 
     /**
-     * @throws Exception
+     * Update a customer's balance.
+     *
+     * @param string $id The customer's ID.
+     * @param float $amount The amount to add to the customer's balance.
+     *
+     * @throws ModelNotFoundException If the customer is not found.
+     * @throws Exception If the new balance would exceed the customer's credit limit.
+     *
+     * @return Customer The updated customer.
      */
     public function updateCustomerBalance(string $id, float $amount): Customer
     {
@@ -67,11 +105,23 @@ class CustomerService
         return $customer;
     }
 
+    /**
+     * Retrieve a customer group by its ID.
+     *
+     * @param string $id The group's ID.
+     * @return CustomerGroup|null The group, or null if not found.
+     */
     public function getGroupById(string $id): ?CustomerGroup
     {
         return CustomerGroup::find($id);
     }
 
+    /**
+     * Create a new customer group with the given data.
+     *
+     * @param array $data The data to create the group with.
+     * @return CustomerGroup The newly created group.
+     */
     public function createGroup(array $data): CustomerGroup
     {
         return DB::transaction(function () use ($data) {
