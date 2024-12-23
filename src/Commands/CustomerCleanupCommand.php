@@ -26,7 +26,7 @@ class CustomerCleanupCommand extends Command
             ->where('deleted_at', '<=', $date)
             ->forceDelete();
 
-        $this->info("Cleaned up {$customersCount} customers and {$groupsCount} groups older than {$days} days");
+        $this->info("Cleaned up $customersCount customers and $groupsCount groups older than $days days");
 
         return self::SUCCESS;
     }

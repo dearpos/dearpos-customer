@@ -2,11 +2,14 @@
 
 namespace DearPOS\DearPOSCustomer\Models;
 
+use DearPOS\DearPOSCustomer\Observers\CustomerAddressObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[ObservedBy([CustomerAddressObserver::class])]
 class CustomerAddress extends Model
 {
     use HasUuids;
@@ -32,27 +35,5 @@ class CustomerAddress extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($address) {
-            // If this is the first address, set as default
-            if (! $address->customer->addresses()->exists()) {
-                $address->is_default = true;
-            }
-        });
-
-        static::saved(function ($address) {
-            // If set as default, update other addresses with the same type
-            if ($address->is_default) {
-                $address->customer->addresses()
-                    ->where('id', '!=', $address->id)
-                    ->where('address_type', $address->address_type)
-                    ->update(['is_default' => false]);
-            }
-        });
     }
 }
