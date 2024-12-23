@@ -9,7 +9,7 @@ class CustomerContactObserver
     public function creating(CustomerContact $customerContact): void
     {
         // If this is the first contact, set as primary
-        if (!$customerContact->exists()) {
+        if (! $customerContact->exists()) {
             $customerContact->is_primary = true;
         }
     }
