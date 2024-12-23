@@ -8,7 +8,7 @@ class CustomerAddressObserver
 {
     public function creating(CustomerAddress $customerAddress): void
     {
-        if (!$customerAddress->exists()) {
+        if (! $customerAddress->exists()) {
             $customerAddress->is_default = true;
         }
     }
