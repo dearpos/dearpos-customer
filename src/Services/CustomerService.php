@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerService
 {
-    /**
-     * @param string $id
-     * @return Customer|null
-     */
     public function getCustomerById(string $id): ?Customer
     {
         return Customer::find($id);
@@ -38,7 +34,6 @@ class CustomerService
      * @param array $data The customer's data.
      * @return Customer The newly created customer.
      */
-
     public function createCustomer(array $data): Customer
     {
         return DB::transaction(function () use ($data) {
@@ -80,11 +75,10 @@ class CustomerService
      *
      * @param string $id The customer's ID.
      * @param float $amount The amount to add to the customer's balance.
+     * @return Customer The updated customer.
      *
      * @throws ModelNotFoundException If the customer is not found.
      * @throws Exception If the new balance would exceed the customer's credit limit.
-     *
-     * @return Customer The updated customer.
      */
     public function updateCustomerBalance(string $id, float $amount): Customer
     {
