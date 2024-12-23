@@ -4,6 +4,7 @@ namespace DearPOS\DearPOSCustomer\Services;
 
 use DearPOS\DearPOSCustomer\Models\Customer;
 use DearPOS\DearPOSCustomer\Models\CustomerGroup;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection as SupportCollection;
@@ -44,6 +45,9 @@ class CustomerService
         });
     }
 
+    /**
+     * @throws Exception
+     */
     public function updateCustomerBalance(string $id, float $amount): Customer
     {
         $customer = $this->getCustomerById($id);
@@ -55,7 +59,7 @@ class CustomerService
         $newBalance = $customer->current_balance + $amount;
 
         if ($newBalance > $customer->credit_limit) {
-            throw new \Exception('Insufficient credit limit');
+            throw new Exception('Insufficient credit limit');
         }
 
         $customer->update(['current_balance' => $newBalance]);
@@ -121,7 +125,7 @@ class CustomerService
     public function addCredit(Customer $customer, array $data): void
     {
         DB::transaction(function () use ($customer, $data) {
-            // Hitung perubahan saldo
+            // Calculate balance change
             $amount = $data['amount'];
             if ($data['transaction_type'] === 'decrease') {
                 $amount = -$amount;
@@ -129,15 +133,15 @@ class CustomerService
 
             $newBalance = $customer->current_balance + $amount;
 
-            // Validasi batas kredit
+            // Validate credit limit
             if ($newBalance > $customer->credit_limit) {
-                throw new \Exception('Transaction would exceed credit limit');
+                throw new Exception('Transaction would exceed credit limit');
             }
 
-            // Buat riwayat kredit
+            // Create credit history
             $customer->creditHistory()->create($data);
 
-            // Update saldo pelanggan
+            // Update customer balance
             $customer->update(['current_balance' => $newBalance]);
         });
     }

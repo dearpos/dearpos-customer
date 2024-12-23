@@ -39,14 +39,14 @@ class CustomerAddress extends Model
         parent::boot();
 
         static::creating(function ($address) {
-            // Jika ini alamat pertama, set sebagai default
+            // If this is the first address, set as default
             if (! $address->customer->addresses()->exists()) {
                 $address->is_default = true;
             }
         });
 
         static::saved(function ($address) {
-            // Jika diset sebagai default, update alamat lain dengan tipe yang sama
+            // If set as default, update other addresses with the same type
             if ($address->is_default) {
                 $address->customer->addresses()
                     ->where('id', '!=', $address->id)

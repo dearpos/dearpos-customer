@@ -26,6 +26,11 @@ class CustomerGroup extends Model
         'is_active' => 'boolean',
     ];
 
+    protected $attributes = [
+        'discount_percentage' => 0,
+        'is_active' => true,
+    ];
+
     public function customers(): HasMany
     {
         return $this->hasMany(Customer::class, 'group_id');

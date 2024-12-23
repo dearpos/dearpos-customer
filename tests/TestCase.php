@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace DearPOS\DearPOSCustomer\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
