@@ -33,9 +33,4 @@ class DearPOSCustomerServiceProvider extends PackageServiceProvider
             ])
             ->hasRoute('api');
     }
-
-    public function boot(): void
-    {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-    }
 }
