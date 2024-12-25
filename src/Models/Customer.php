@@ -3,22 +3,22 @@
 namespace DearPOS\DearPOSCustomer\Models;
 
 /**
-* @property string $id
-* @property string $group_id
-* @property string $code
-* @property string $name
-* @property string $email
-* @property string $phone
-* @property string $mobile
-* @property string $tax_number
-* @property float $credit_limit
-* @property float $current_balance
-* @property string $notes
-* @property string $status
-* @property \Carbon\Carbon $created_at
-* @property \Carbon\Carbon $updated_at
-* @property \Carbon\Carbon|null $deleted_at
-*/
+ * @property string $id
+ * @property string $group_id
+ * @property string $code
+ * @property string $name
+ * @property string $email
+ * @property string $phone
+ * @property string $mobile
+ * @property string $tax_number
+ * @property float $credit_limit
+ * @property float $current_balance
+ * @property string $notes
+ * @property string $status
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon|null $deleted_at
+ */
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

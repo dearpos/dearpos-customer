@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
-* @property int $id
-* @property int $customer_id
-* @property string $name
-* @property string|null $position
-* @property string|null $phone
-* @property string|null $mobile
-* @property string $email
-* @property bool $is_primary
-* @property \DateTime $created_at
-* @property \DateTime $updated_at
-*/
+ * @property int $id
+ * @property int $customer_id
+ * @property string $name
+ * @property string|null $position
+ * @property string|null $phone
+ * @property string|null $mobile
+ * @property string $email
+ * @property bool $is_primary
+ * @property \DateTime $created_at
+ * @property \DateTime $updated_at
+ */
 class CustomerContactResource extends JsonResource
 {
     public function toArray(Request $request): array
