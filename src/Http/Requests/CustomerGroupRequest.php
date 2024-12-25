@@ -25,7 +25,9 @@ class CustomerGroupRequest extends FormRequest
         }
 
         if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['name'][] = 'unique:customer_groups,name,'.$this->route('customer_group')->id;
+            $customerGroup = $this->route('customer_group');
+            $customerId = is_object($customerGroup) ? $customerGroup->id : $customerGroup;
+            $rules['name'][] = 'unique:customer_groups,name,'.$customerId;
         }
 
         return $rules;

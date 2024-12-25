@@ -7,6 +7,7 @@ use DearPOS\DearPOSCustomer\Commands\CustomerCreateCommand;
 use DearPOS\DearPOSCustomer\Commands\CustomerExportCommand;
 use DearPOS\DearPOSCustomer\Commands\CustomerImportCommand;
 use DearPOS\DearPOSCustomer\Commands\CustomerSyncBalanceCommand;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -31,6 +32,15 @@ class DearPOSCustomerServiceProvider extends PackageServiceProvider
                 CustomerCleanupCommand::class,
                 CustomerSyncBalanceCommand::class,
             ])
-            ->hasRoute('api');
+            ->hasRoute('api')
+            ->hasInstallCommand(function (InstallCommand $command) {
+                $command
+                    ->publishConfigFile()
+                    ->publishMigrations()
+                    ->askToRunMigrations()
+                    ->copyAndRegisterServiceProviderInApp()
+                    ->askToStarRepoOnGitHub('dearpos/dearpos-customer');
+
+            });
     }
 }

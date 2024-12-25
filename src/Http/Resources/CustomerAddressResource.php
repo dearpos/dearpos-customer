@@ -5,6 +5,20 @@ namespace DearPOS\DearPOSCustomer\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+* @property int $id
+* @property int $customer_id
+* @property string $address_type
+* @property string $address_line_1
+* @property string|null $address_line_2
+* @property string $city
+* @property string $state
+* @property string $postal_code
+* @property string $country
+* @property bool $is_default
+* @property \DateTime $created_at
+* @property \DateTime $updated_at
+*/
 class CustomerAddressResource extends JsonResource
 {
     public function toArray(Request $request): array

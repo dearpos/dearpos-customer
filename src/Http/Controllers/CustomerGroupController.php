@@ -22,7 +22,7 @@ class CustomerGroupController extends Controller
         }
 
         if ($request->has('status')) {
-            $query->where('is_active', (bool) $request->status === 'active');
+            $query->where('is_active', $request->status === 'active');
         }
 
         $perPage = $request->input('per_page', 15);

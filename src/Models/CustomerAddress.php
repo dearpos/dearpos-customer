@@ -2,6 +2,22 @@
 
 namespace DearPOS\DearPOSCustomer\Models;
 
+/**
+* @property string $id
+* @property string $customer_id
+* @property string $address_type
+* @property string $address_line_1
+* @property string $address_line_2
+* @property string $city
+* @property string $state
+* @property string $postal_code
+* @property string $country
+* @property bool $is_default
+* @property \Carbon\Carbon $created_at
+* @property \Carbon\Carbon $updated_at 
+* @property \Carbon\Carbon|null $deleted_at
+*/
+
 use DearPOS\DearPOSCustomer\Observers\CustomerAddressObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
